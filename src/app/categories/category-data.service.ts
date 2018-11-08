@@ -4,20 +4,35 @@ import {Category} from './category';
 @Injectable()
 export class CategoryDataService {
 
-  // Placeholder for last id so we can simulate
-  // automatic incrementing of id's
-  lastId = 0;
+
 
     // Placeholder for category's
     categories: Category[] = [];
+
+    // Placeholder for last id so we can simulate
+    // automatic incrementing of id's
+    lastId = 0;
+
+    i = 2;
 
   constructor() { }
 
   // Simulate POST /categories
   addCategory(category: Category): CategoryDataService {
     if (!category.id) {
+      this.lastId = this.categories.length;
       category.id = ++this.lastId;
+
     }
+
+    for (let cat of this.categories){
+      if (category.name === cat.name) {
+        category.name = cat.name + " " + this.i;
+        this.i = this.i + 1;
+      }
+
+    }
+
     this.categories.push(category);
     return this;
   }
@@ -26,6 +41,10 @@ export class CategoryDataService {
   deleteCategoryById(id: number): CategoryDataService {
     this.categories = this.categories
       .filter(category => category.id !== id);
+      let newId = 0;
+      for (let category of this.categories){
+        category.id = ++newId;
+      }
     return this;
   }
 

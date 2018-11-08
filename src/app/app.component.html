@@ -9,16 +9,20 @@
       <ul class="list-group">
         <li *ngFor="let category of categories" class="list-group-item d-flex justify-content-between align-items-center" (click)="onSelect(category)">
           {{category.name}}
-          <span class="badge primary-color badge-pill">{{countTodosByCat(category.id)}}</span>
+          <span class="badge primary-color badge-pill mr-2 ml-auto">{{countTodosByCat(category.id)}}</span>
+          <button type="button" class="close" aria-label="Close" style="float: right;" (click)="removeCategory(category)">
+            <span aria-hidden="true" >&times;</span>
+          </button>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <form>
             <input mdbActive type="text" placeholder="Add new category" id="form1" class="form-control" [(ngModel)]="newCategory.name"
               (keyup.enter)="addCategory()" name="addCat">
           </form>
-          <span class="badge primary-color badge-pill">
+          <span class="badge white-color badge-pill mx-3 btn-outline-primary">
             <a class="prefix">
-              <i class="fa fa-plus" aria-hidden="true" (click)="addCategory()"></i>
+              <i class="fa fa-plus" style="color:#007bff;"
+aria-hidden="true" (click)="addCategory()"></i>
             </a>
           </span>
         </li>
@@ -35,7 +39,7 @@
           <form class="full-width">
             <div *ngFor="let todo of todosForCat">
               <input type="checkbox" id="{{todo.id}}" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
-              <label for="{{todo.id}}" [ngClass]="{'strikethrough' : todo.complete}">{{todo.title}}</label>
+              <label class="mx-2" for="{{todo.id}}" [ngClass]="{'strikethrough' : todo.complete}">{{todo.title}}</label>
               <button type="button" class="close" aria-label="Close" style="float: right;" (click)="removeTodo(todo)">
                 <span aria-hidden="true" >&times;</span>
               </button>
@@ -49,8 +53,8 @@
             <a class="prefix">
               <i class="fa fa-plus prefix" (click)="addTodo()"></i>
             </a>
-            <input mdbActive type="text" id="form2" class="form-control" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()" name="addNew">
-            <label for="form2">Add new task</label>
+            <input mdbActive type="text" id="form2" class="form-control" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()" name="addNew" placeholder="Add new task">
+            <label for="form2" placeholder="Add new task"></label>
           </form>
         </div>
       </div>
@@ -59,8 +63,9 @@
       <div class="col-md-5 test 5 list text-center">
         <h5 class="pt-3">Choose category from menu in the left.</h5>
         <p class="pt-5">You can also create a new category by typing the name and pressing the enter or clicking on the
-          <span class="badge primary-color badge-pill">
-            <i class="fa fa-plus" aria-hidden="true"></i>
+          <span class="badge white-color badge-pill btn-outline-primary">
+            <i class="fa fa-plus" style="color:#007bff;
+" aria-hidden="true"></i>
           </span>
           button.
         </p>

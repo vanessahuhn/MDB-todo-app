@@ -5,6 +5,6 @@ export class Todo {
     category: number;
 
     constructor(values: Object = {}) {
-      Object.assign(this, values);
+    Object.assign(this, values);
     }
 }
